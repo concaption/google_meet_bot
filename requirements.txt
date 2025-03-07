@@ -1,0 +1,5 @@
+# Minimal requirements for Google Meet guest join and recording
+selenium==4.15.2
+webdriver-manager==4.0.1
+# Optional: For Windows screen resolution detection with recording
+pywin32>=223; sys_platform == 'win32'
