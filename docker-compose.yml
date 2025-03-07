@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  meetbot:
+    build: .
+    volumes:
+      - ./recordings:/app/recordings
+      - ./screenshots:/app/screenshots
+    environment:
+      - DISPLAY=:99
+    entrypoint: ["python", "google_meet_guest.py"]
+    # Override command when running with docker-compose
+    # Use: docker-compose run --rm meetbot https://meet.google.com/xxx-xxxx-xxx "Your Name" --record

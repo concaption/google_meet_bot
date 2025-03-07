@@ -1,4 +1,4 @@
-.PHONY: setup install run join record detect-audio clean help
+.PHONY: setup install run join record detect-audio clean help docker-build docker-run docker-help
 
 # Default target
 help:
@@ -11,6 +11,9 @@ help:
 	@echo "  make record URL=X NAME=Y - Record a Google Meet session"
 	@echo "  make detect-audio - Detect available audio devices for recording"
 	@echo "  make clean        - Remove temp files and __pycache__"
+	@echo "  make docker-build - Build the Docker image"
+	@echo "  make docker-run   - Run the bot using Docker"
+	@echo "  make docker-help  - Show Docker usage"
 
 # Setup environment
 setup:
@@ -57,6 +60,33 @@ detect-audio:
 clean:
 	rm -rf __pycache__
 	find . -name "*.pyc" -delete
+
+# Docker commands
+docker-build:
+	docker build -t google-meet-bot .
+
+docker-run:
+ifndef URL
+	@echo "URL is required. Usage: make docker-run URL=https://meet.google.com/xyz NAME='Your Name'"
+else
+ifndef NAME
+	@echo "NAME is required. Usage: make docker-run URL=https://meet.google.com/xyz NAME='Your Name'"
+else
+	docker run --rm \
+		-v "$(shell pwd)/recordings:/app/recordings" \
+		-v "$(shell pwd)/screenshots:/app/screenshots" \
+		google-meet-bot $(URL) "$(NAME)" $(if $(RECORD),--record) $(if $(DEBUG),--debug) $(if $(DURATION),--duration $(DURATION))
+endif
+endif
+
+docker-help:
+	@echo "Docker Usage:"
+	@echo "  1. Build the image:   make docker-build"
+	@echo "  2. Run the bot:       make docker-run URL=https://meet.google.com/xyz NAME='Your Name'"
+	@echo "  Options:"
+	@echo "    RECORD=1           Enable recording"
+	@echo "    DEBUG=1            Enable debug mode"
+	@echo "    DURATION=minutes   Set meeting duration (default: 60)"
 
 # Determine which python command to use
 PYTHON=python

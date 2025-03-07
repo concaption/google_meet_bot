@@ -81,6 +81,54 @@ python google_meet_guest.py abc-def-ghi "John Doe" --record
 - `--record` - Record the meeting (requires FFmpeg)
 - `--recording-dir DIR` - Directory to save recordings (default: ./recordings)
 
+## Docker Support
+
+You can run the Google Meet Bot in a Docker container without installing any dependencies locally.
+
+### Requirements for Docker usage
+- Docker installed on your system
+
+### Build Docker image
+
+```bash
+docker build -t google-meet-bot .
+```
+
+### Running with Docker
+
+```bash
+docker run --rm \
+  -v "$(pwd)/recordings:/app/recordings" \
+  -v "$(pwd)/screenshots:/app/screenshots" \
+  google-meet-bot https://meet.google.com/abc-def-ghi "Your Name" --record
+```
+
+### Using Docker helper scripts
+
+#### Linux/macOS
+```bash
+# Make the script executable
+chmod +x docker-run.sh
+
+# Join and record a meeting
+./docker-run.sh --record https://meet.google.com/abc-def-ghi "Your Name"
+```
+
+#### Windows
+```batch
+docker-run.bat --record https://meet.google.com/abc-def-ghi "Your Name"
+```
+
+### Using Docker with Make
+
+```bash
+# Build the Docker image
+make docker-build
+
+# Join a meeting in Docker
+make docker-run URL=https://meet.google.com/abc-def-ghi NAME="Your Name" RECORD=1
+```
+
 ## How It Works
 
 The script works in these steps:

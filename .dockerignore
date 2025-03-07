@@ -1,0 +1,25 @@
+# Git files
+.git
+.gitignore
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+ENV/
+
+# VS Code
+.vscode/
+.devcontainer/
+
+# Data directories 
+# (we'll mount these as volumes instead of including them)
+recordings/
+screenshots/
+
+# Docker files (no need to include these in the build)
+Dockerfile
+docker-compose.yml
