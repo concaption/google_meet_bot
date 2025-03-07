@@ -1,6 +1,6 @@
 # Google Meet Guest Joiner - Simplified Implementation
 
-This directory contains a simplified, standalone implementation for joining Google Meet sessions as a guest. The implementation incorporates all the fixes and improvements developed throughout the project.
+This repository contains a simplified, standalone implementation for joining Google Meet sessions as a guest. The implementation incorporates all the fixes and improvements developed throughout the project.
 
 ## Features
 

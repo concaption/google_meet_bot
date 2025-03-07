@@ -1,0 +1,14 @@
+{
+    "customizations": {
+        "codespaces": {
+        },
+        "vscode": {
+            "extensions": [
+				"ms-python.python",
+				"github.copilot",
+				"ms-vscode.makefile-tools",
+				"ms-azuretools.vscode-docker"
+			]
+        }
+    }
+}
